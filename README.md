@@ -9,13 +9,14 @@ DEMO:-
 2) Webcam
    
 
-   
+---
 Features
 
 - Detect 80+ object classes (COCO dataset)
 - Image upload detection
 - Real-time webcam detection
 
+---
 Tech Stack
 
 - **Python**
@@ -25,8 +26,35 @@ Tech Stack
 - **NumPy**
 - **Pillow**
 
+---
 How It Works
 
-YOLOv8 performs object detection on image frames,
-Streamlit provides an interactive UI and
-OpenCV handles webcam and image processing.
+The application uses YOLOv8 (You Only Look Once), a deep learning-based object detection model, to identify and classify objects in images and real-time video streams.
+
+1. Model Loading
+The YOLOv8 model (yolov8m.pt) is loaded using the Ultralytics library.
+This is a pre-trained model trained on the COCO dataset (80 object classes).
+Purpose: Enables detection without needing custom training
+
+2. Image Input Pipeline
+When a user uploads an image: The image is loaded using PIL
+Converted into a NumPy array for processing
+Passed to the YOLO model for inference
+The model detects objects, Draws bounding boxes, Assigns labels and confidence scores and Output is displayed using Streamlit
+
+3. Real-Time Webcam Detection
+When webcam mode is enabled, OpenCV captures frames continuously, Each frame is Flipped for mirror view
+Passed into the YOLO model
+YOLO processes each frame in real time
+Detected objects are drawn on the frame and displayed live
+
+4. Object Counting
+The model returns detected bounding boxes, Each detected object is classified.
+
+---
+Use Cases
+
+- Smart surveillance systems
+- Traffic monitoring
+- Retail analytics
+- Assistive vision systems
